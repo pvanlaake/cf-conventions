@@ -5,11 +5,11 @@
 When gridded data does not represent the point values of a field but instead represents some characteristic of the field within cells of non-zero size, a complete description of the variable should include metadata that describes the domain or extent of each cell, and the characteristic of the field that the cell values represent.
 The commonest cases have one-dimensional cells along spatiotemporal axes, for instance cells along a time axis for consecutive months whose values contain monthly means.
 The conventions presented in <<cell-boundaries>>, <<cell-measures>> and <<cell-methods>> describe cases in which each grid point is associated with a cell consisting of a single one-dimensional interval, a single two-dimensional polygonal area, or in general a single _n_-dimensional volume in the _n_-dimensional space described by its coordinate variables.
-As an alternative to _n_-dimensional volumes with bounds, we provide <<geometries>>, for the case of geospatial applications in which each data value pertains to a single real-world feature, such as a river, watershed or country, represented by one or more points, lines or polygons.
+As an alternative to _n_-dimensional volumes with bounds, <<geometries>> is provided, for the case of geospatial applications in which each data value pertains to a single real-world feature, such as a river, watershed or country, represented by one or more points, lines or polygons.
 
 It is possible for a single data value to be the result of an operation whose domain is a disjoint set of intervals or areas.
 This is true for many types of climatological statistic; for example, the mean January temperature for the years 1971-2000 is computed from the 30 individual months of January, which are a set of discontiguous time-intervals.
-Climatological statistics are of such importance that we provide special methods for describing their associated computational domains in <<climatological-statistics>>.
+Climatological statistics are of such importance that special methods are provided for describing their associated computational domains in <<climatological-statistics>>.
 Climatological statistics and other kinds of statistic, e.g. zonal means, may be used as a reference with respect to which anomalies are computed.
 <<anomalies>> gives conventions for relating an anomaly data variable to its reference statistic, and for describing how the latter was computed.
 
@@ -19,7 +19,7 @@ Climatological statistics and other kinds of statistic, e.g. zonal means, may be
 
 To delimit the cells, the **`bounds`** attribute may be added to the appropriate coordinate variable(s).
 The value of **`bounds`** is the name of the variable that contains the vertices of the cell boundaries.
-We refer to this type of variable as a "boundary variable."
+This type of variable is referred to as a "boundary variable."
 If cell boundaries are provided, it is recommended that each gridpoint should lie somewhere within or upon the boundaries of its own cell.
 
 If cell boundaries are not provided (using the **`bounds`** attribute), an application can make no assumption about the location or extent of the cells.
@@ -30,7 +30,7 @@ Nonetheless, the bounds may still be included, for instance because the grid is 
 A cell of truly zero size can be indicated by giving it coincident boundaries.
 
 A boundary variable must have one more dimension than its associated coordinate or auxiliary coordinate variable.
-We refer to the additional dimension as the "vertex dimension".
+The additional dimension is referred to as the "vertex dimension".
 The vertex dimension must be the most rapidly varying dimension (the last dimension in CDL order), and its size is the maximum number of cell vertices.
 
 The vertex dimension must be of size two if the associated variable is one-dimensional (<<bounds-one-d>>), and of size greater than two if the associated variable has more than one dimension (<<bounds-lat-lon>>).
@@ -78,7 +78,7 @@ variables:
 ----
 The boundary variable **`time_bnds`** associates a time point **`i`** with the time interval whose boundaries are **`time_bnds(i,0)`** and **`time_bnds(i,1)`**.
 The instant **`time(i)`** should be contained within the interval, or be at one end of it.
-For instance, with **`i=2`** we might have **`time(2)=10.5`**, **`time_bnds(2,0)=10.0`**, **`time_bnds(2,1)=11.0`**.
+For instance, with **`i=2`** one might have **`time(2)=10.5`**, **`time_bnds(2,0)=10.0`**, **`time_bnds(2,1)=11.0`**.
 If the times are increasing e.g. **`time(3)`** = **`11.5`** &gt; **`10.5`** = **`time(2)`**, which implies **`time(i+1)`** &gt; **`time(i)`** for all **`i`** because coordinates must be monotonic, the bounds must also be increasing for all **`i`**, e.g. **`timebnd(2,1)`** &gt;= **`timebnd(2,0)`**.
 If adjacent intervals are contiguous, the shared endpoint must be identical.
 For example, if the interval **`i=3`** begins at **`11.0`** days, when interval **`i=2`** ends, the values in **`timebnd(3,0)`** and **`timebnd(2,1)`** must be _exactly_ the same.
@@ -126,7 +126,7 @@ The gridpoint location, **`(lat(j,i),lon(j,i))`**, should be contained within th
 The vertices must be ordered such that, when visiting the vertices in order, the four-sided perimeter of the cell is traversed anticlockwise on the lon-lat surface as seen from above.
 If i-j-upward is a right-handed coordinate system (like lon-lat-upward), this can be arranged as in <<img-bnd_2d_coords>>.
 Let us call the side of cell **`(j,i)`** facing cell **`(j,i-1)`** the "**`i-1`**" side, the side facing cell **`(j,i+1)`** the "**`i+1`**" side, and similarly for "**`j-1`**" and "**`j+1`**".
-Then we can refer to the vertex formed by sides **`i-1`** and **`j-1`** as **`(j-1,i-1)`**.
+Then the vertex formed by sides **`i-1`** and **`j-1`** can be referred to as **`(j-1,i-1)`**.
 With this notation, the four vertices are indexed as follows: **`0=(j-1,i-1)`**, **`1=(j-1,i+1)`**, **`2=(j+1,i+1)`**, **`3=(j+1,i-1)`**.
 
 [[img-bnd_2d_coords]]
@@ -169,7 +169,7 @@ For any term that depends on the vertical dimension, however, the variable names
 
 Whenever a **`formula_terms`** attribute is attached to a boundary variable, the formula terms may additionally be identified using a second method: variables appearing in the vertical coordinates' **`formula_terms`** may be declared to be coordinate, scalar coordinate or auxiliary coordinate variables, and those coordinates may have **`bounds`** attributes that identify their boundary variables.
 In that case, the **`bounds`** attribute of a formula terms variable must be consistent with the **`formula_terms`** attribute of the boundary variable.
-Software digesting legacy datasets (constructed prior to version 1.7 of this standard) may have to rely in some cases on the first method of identifying the formula term variables and in other cases, on the second.
+Software digesting legacy datasets (constructed prior to version 1.7 of these conventions) may have to rely in some cases on the first method of identifying the formula term variables and in other cases, on the second.
 Starting from version 1.7, however, the first method will be sufficient.
 
 [[specifying-formula_terms-ex]]
@@ -228,7 +228,7 @@ In this case, rather than (or in addition to) indicating grid cell area, it may 
 To indicate extra information about the spatial properties of a variable's grid cells, a **`cell_measures`** attribute may be defined for a variable.
 This is a string attribute comprising a list of blank-separated pairs of words of the form "**`measure: name`**".
 For the moment, "**`area`**" and "**`volume`**" are the only defined measures, but others may be supported in future.
-The "name" is the name of the variable containing the measure values, which we refer to as a "measure variable".
+The "name" is the name of the variable containing the measure values, which is called a "measure variable".
 The dimensions of a measure variable must be the same as or a subset of the dimensions of the variable to which it is related, but their order is not restricted, and with one exception:
 If a cell measure variable of a data variable that has been compressed by gathering (<<compression-by-gathering>>) does not span the compressed dimension, then its dimensions may be any subset of the data variable's uncompressed dimensions, i.e. any of the dimensions of the data variable except the compressed dimension, and any of the dimensions listed by the **`compress`** attribute of the compressed coordinate variable.
 In the case of area, for example, the field itself might be a function of longitude, latitude, and time, but the variable containing the area values would only include longitude and latitude dimensions (and the dimension order could be reversed, although this is not recommended).
@@ -277,7 +277,7 @@ variables:
 [[cell-methods, Section 7.3, "Cell Methods"]]
 === Cell Methods
 
-To describe the characteristic of a field that is represented by cell values, we define the **`cell_methods`** attribute of the variable.
+To describe the characteristic of a field that is represented by cell values, the **`cell_methods`** attribute of the variable is used.
 This is a string attribute comprising a list of blank-separated words of the form "__name: method__".
 Each "__name: method__" pair indicates that for an axis identified by __name__, the cell values representing the field have been determined or derived by the specified __method__.
 For example, if data values have been generated by computing time means, then this could be indicated with **`cell_methods="t: mean"`**, assuming here that the name of the time dimension variable is "t".
@@ -382,7 +382,7 @@ If there is no standardized information, the keyword **`comment:`** should be om
 For instance, an area-weighted mean over latitude could be indicated as **`lat: mean (area-weighted)`** or **`lat: mean (interval: 1 degree_north comment: area-weighted)`**.
 
 A dimension of size one may be the result of "collapsing" an axis by some statistical operation, for instance by calculating a variance from time series data.
-We strongly recommend that dimensions of size one be retained (or scalar coordinate variables be defined) to enable documentation of the method (through the **`cell_methods`** attribute) and its domain (through the **`bounds`** attribute).
+It is strongly recommended that dimensions of size one be retained (or scalar coordinate variables be defined) to enable documentation of the method (through the **`cell_methods`** attribute) and its domain (through the **`bounds`** attribute).
 
 [[surface-air-temperature-variance-ex]]
 [caption="Example 7.6. "]
@@ -506,7 +506,7 @@ For example, there could be a **`cell_methods`** entry of "**`longitude: mean`**
 That would indicate a mean over all longitudes.
 Note, however, that if in addition the data variable had a scalar coordinate variable with a **`standard_name`** of **`region`** and a value of **`atlantic_ocean`**, it would indicate a mean over longitudes that lie within the Atlantic Ocean, not all longitudes.
 
-We recommend that whenever possible, cell bounds should be supplied by giving the variable a dimension of size one and attaching bounds to the associated coordinate variable.
+It is recommended that whenever possible, cell bounds should be supplied by giving the variable a dimension of size one and attaching bounds to the associated coordinate variable.
 
 [[climatological-statistics, Section 7.4, "Climatological Statistics"]]
 === Climatological Statistics
@@ -514,8 +514,8 @@ We recommend that whenever possible, cell bounds should be supplied by giving th
 Climatological statistics may be derived from corresponding portions of the annual cycle in a set of years, e.g., the average January temperatures in the climatology of 1961-1990, where the values are derived by averaging the 30 Januarys from the separate years.
 Portions of the climatological cycle are specified by references to dates within the calendar year.
 However, a calendar year is not a well-defined unit of time, because it differs between leap years and other years, and among calendars.
-Nonetheless for practical purposes we wish to compare statistics for months or seasons from different calendars, and to make climatologies from a mixture of leap years and other years.
-Hence we provide special conventions for indicating dates within the climatological year.
+Nonetheless for practical purposes it may be desirable to compare statistics for months or seasons from different calendars, and to make climatologies from a mixture of leap years and other years.
+Hence special conventions for indicating dates within the climatological year are provided.
 Climatological statistics may also be derived from corresponding portions of a range of days, for instance the average temperature for each hour of the average day in April 1997.
 In addition the two concepts may be used at once, for instance to indicate not April 1997, but the average April of the five years 1995-1999.
 
@@ -528,20 +528,20 @@ The rules and recommendations for attributes of the climatological boundary vari
 Using the units and calendar of the time coordinate variable, element (i,0) of the climatology boundary variable specifies the beginning of the first subinterval and element (i,1) the end of the last subinterval used to evaluate the climatological statistics with index i in the time dimension.
 The time coordinates should be values that are representative of the climatological time intervals, such that an application which does not recognise climatological time will nonetheless be able to make a reasonable interpretation.
 
-For compatibility with the COARDS standard, a climatological time coordinate in the default **`standard`** and **`julian`** calendars may be indicated by setting the datetime reference string in the time coordinate's **`units`** attribute to midnight at 0 `degrees_east` on 1 January in year 0 (i.e., **`since 0-1-1`**).
+For compatibility with the COARDS conventions, a climatological time coordinate in the default **`standard`** and **`julian`** calendars may be indicated by setting the datetime reference string in the time coordinate's **`units`** attribute to midnight at 0 `degrees_east` on 1 January in year 0 (i.e., **`since 0-1-1`**).
 This convention is deprecated because it does not provide any information about the intervals used to compute the climatology, and there may be inconsistencies among software packages in the interpretation of the time coordinates with a reference time of year 0.
 Use of year 0 for this purpose is impossible in all other calendars, because year 0 is a valid year.
 
 A climatological axis may use different statistical methods to represent variation among years, within years and within days.
 For example, the average January temperature in a climatology is obtained by averaging both within years and over years.
 This is different from the average January-maximum temperature and the maximum January-average temperature.
-For the former, we first calculate the maximum temperature in each January, then average these maxima; for the latter, we first calculate the average temperature in each January, then find the largest one.
+For the former, first the maximum temperature in each January is calculated, then average these maxima; for the latter, first the average temperature in each January is calculated, then the largest one identified.
 As usual, the statistical operations are recorded in the **`cell_methods`** attribute, which may have two or three entries for the climatological time dimension.
 
 Valid values of the **`cell_methods`** attribute must be in one of the forms from the following list.
 The intervals over which various statistical methods are applied are determined by decomposing the date and time specifications of the climatological time bounds of a cell, as recorded in the variable named by the **`climatology`** attribute.
 (The date and time specifications must be calculated from the time coordinates expressed in units of "time interval since reference date and time".)
-In the descriptions that follow we use the abbreviations __y__, __m__, __d__, __H__, __M__, and __S__ for year, month, day, hour, minute, and second respectively.
+In the descriptions that follow the abbreviations __y__, __m__, __d__, __H__, __M__, and __S__ are used for year, month, day, hour, minute, and second respectively.
 The suffix __0__ indicates the earlier bound and __1__ the latter.
 
 time: method1 **`within years`**   time: method2 **`over years`**:: __method1__ is applied to the time intervals (mdHMS0-mdHMS1) within individual years and __method2__ is applied over the range of years (y0-y1).
@@ -558,7 +558,7 @@ Analogous situations arise for daily intervals running across midnight from one 
 
 When considering intervals within days, if the earlier time of day is equal to the later time of day, then the method is applied to a full 24 hour day.
 
-__We have tried to make the examples in this section easier to understand by translating all time coordinate values to date and time formats.
+__The examples in this section have been made easier to understand by translating all time coordinate values to date and time formats.
 This is not currently valid CDL syntax.__
 
 [[climatological-seasons-ex]]
@@ -733,13 +733,13 @@ An "anomaly" is the difference between a physical quantity and its statistical n
 For example, a commonly-used anomaly is the current temperature at a specific location minus the long-term average temperature there.
 
 CF offers two conventions for describing anomaly data.
-In the remainder of this section and the following two (<<anomalies-norm-data>> and <<anomalies-norm-metadata>>), we describe a general convention for anomalies over any type of coordinate, including details about how the norm was calculated.
-In <<temporal-anomalies>>, we describe a legacy convention that depends on special standard names.
+In the remainder of this section and the following two (<<anomalies-norm-data>> and <<anomalies-norm-metadata>>), a general convention for anomalies over any type of coordinate is described, including details about how the norm was calculated.
+In <<temporal-anomalies>>, a legacy convention is described that depends on special standard names.
 It can be used only for simple temporal anomalies, and is insufficiently informative for many use-cases.
 
 The generalized definition of an anomaly value __A__ of some physical quantity __q__ is the difference __P__ − __N__ between a particular value __P__ of __q__ and a normal value or norm __N__ of __q__.
 __N__ is some statistic calculated from the values of __q__ that lie within specified ranges of one or more of the variables (usually spatiotemporal coordinates) on which __q__ depends.
-We denote this set of variables as {__c__}; usually there is only one variable in the set.
+This set of variables is denoted as {__c__}; usually there is only one variable in the set.
 __P__ can be, but is not necessarily, one of the values of __q__ from which __N__ is calculated.
 
 In the same way, a data variable __A__ containing anomalies (an "anomaly data variable") is notionally the difference between a data variable __P__ containing the original data and a data variable __N__ (a "norm data variable") containing the statistical norm.
@@ -772,13 +772,13 @@ This is known because the entries in **`cell_methods`** appear in order of appli
 * that __N__ was calculated from the variation of __P__ over dimensions identified by the __name__(s).
 
 Each __name__ must identify an "axis" of the anomaly data variable __A__.
-By "axis" we mean a dimension and its corresponding coordinate variable, or a scalar coordinate variable.
-In either case, we refer to the axis as an "anomaly axis" and to the variable as an "anomaly coordinate variable".
+The word "axis" means a dimension and its corresponding coordinate variable, or a scalar coordinate variable.
+In either case, the axis is referred to as an "anomaly axis" and to the variable as an "anomaly coordinate variable".
 The anomaly coordinate variable of each axis must have a **`standard_name`** attribute.
 Usually there is only one anomaly axis, and usually it is a spatiotemporal axis.
 
 For instance, for a data variable containing anomalies with respect to the zonal mean, __name__ identifies longitude as the anomaly axis e.g. "**`longitude: anomaly_wrt`** __norm__".
-For an anomaly with respect to the area minimum, we need two __name__s e.g. "**`lat: lon: anomaly_wrt`** __norm__".
+For an anomaly with respect to the area minimum, two __name__s are needed, e.g. "**`lat: lon: anomaly_wrt`** __norm__".
 As described in <<cell-methods>>, the combination of horizontal axes can alternatively be represented by the word **`area`**, thus "**`area: anomaly_wrt`** __norm__".
 
 For an anomaly with respect to a statistic computed over time or climatological time, __name__ identifies the time axis of the anomaly data variable.
@@ -789,7 +789,7 @@ In both cases, __norm__ is an ancillary variable of the anomaly data variable (<
 If the norm data variable __N__ is present in the dataset, it can be named as __norm__ in the **`cell_methods`** of the anomaly variable.
 Such would be the case in a dataset that contains both zonal means and anomalies relative to those means.
 No modification to the metadata of __N__ is required for it to serve as the norm for __A__, and __N__ may still be treated as a data variable in its own right as well.
-We describe the use of a norm data variable first (<<anomalies-norm-data>>) because this case is conceptually more obvious, although it is uncommon for __N__ to be present in the dataset.
+The use of a norm data variable is described first (<<anomalies-norm-data>>) because this case is conceptually more obvious, although it is uncommon for __N__ to be present in the dataset.
 
 The second alternative (<<anomalies-norm-metadata>>) is where __norm__ in **`cell_methods`** identifies a "norm metadata variable" instead of the norm data variable.
 A norm metadata variable contains information about the norm axes, but no data of its own.
@@ -809,7 +809,7 @@ The anomaly data variable must name the norm data variable in its **`ancillary_v
 
 The norm data variable __N__ must have all the same axes as the anomaly data variable __A__, __except__ for the anomaly axes.
 For each anomaly axis (although usually there is only one), the norm data variable has a coordinate variable (and dimension of the same name) or a scalar coordinate variable (named in its **`coordinates`** attribute).
-In either case, we refer to it as a "norm coordinate variable".
+In either case, this is referred to as a "norm coordinate variable".
 The norm coordinate variable must have the same **`standard_name`** as the anomaly coordinate variable.
 It must also have boundary variables to indicate the coordinate range over which __N__ was calculated from __P__.
 
@@ -836,7 +836,7 @@ If the climatological time axis is multivalued, a norm metadata variable is requ
 .Distinguishing temporal anomalies with different kinds of norm
 ====
 The anomaly data variable (__A__, **`delta_tas`**) contains daily maxima (along its **`time`** dimension) for 16th-19th July 2023 of the anomaly in **`air_temperature`** with respect to the climatological mean (__N__, **`climatological_tas`**) of the 30-year period 1990-2019.
-In this example, we include the variable **`tas`** (__P__), from which __A__ was calculated, as __P__ − __N__.
+In this example, the variable **`tas`** (__P__) is included, from which __A__ was calculated, as __P__ − __N__.
 The variable **`tas`** has no metadata that formally identifies it as __P__, and __P__ would not usually be included in the dataset; it is shown here for comparison of its metadata with **`delta_tas`** and **`climatological_tas`**:
 ----
 dimensions:
@@ -1090,13 +1090,13 @@ The auxiliary coordinate variable has a **`select`** attribute naming the climat
 The value of element __i__ of the auxiliary coordinate variable is the index (numbering from 0) along the climatological time dimension of the norm corresponding to element __i__ of the anomaly time dimension.
 Using this method means that the norm metadata variable can refer to a subset of elements of the climatological time axis if only some of them are relevant, and it can refer repeatedly to elements of climatological time axis if there is more than one anomaly time referring to a given climatological time.
 
-In the following example, by "timestep __i__" we mean the slice of the data variable along its time dimension with index __i__ (recalling that index numbering starts with 0).
+In the following example, "timestep __i__" means the slice of the data variable along its time dimension with index __i__ (recalling that index numbering starts with 0).
 Suppose that __A__ contains monthly anomalies for the months of June, July, and August of 2023 and 2024 with respect to __N__, the 30-year climatological monthly means for 1990-2019.
 __N__ has a climatological time axis with a dimension of 12, one for each month January through December.
 The anomaly axis is time, and __A__ has a time dimension of 6 (two years times three months).
 The first time coordinate of __A__ is June 2023, and the first value of the auxiliary coordinate variable is 5, indicating that timestep 0 of __A__ (June 2023) is the anomaly with respect to the timestep 5 of __N__ (climatological June).
 
-Since only June, July, and August climatological means are needed in this example, we could alternatively give the climatological time axis of __N__ a dimension of 3, with elements for those three months alone.
+Since only June, July, and August climatological means are needed in this example, alternatively the climatological time axis of __N__ could be given a dimension of 3, with elements for those three months alone.
 In that case, the first value of the auxiliary coordinate variable would be 0 for climatological June.
 
 In an abstract sense, the norm metadata variable indicates that __A__ is the difference between __P__ and __N'__, where __N'__ is an abstract construction.
@@ -1153,9 +1153,9 @@ data:
 Element **0** of **`month_indices`** is **5**.
 
 This means that element **0** of **`time`**, which is 2023-06-16 (with bounds of 2023-06-01 and 2023-07-01, i.e. the whole of June 2023) is paired with element **5** of **`climatological_time`**, which is the climatology for June 1991-2000.
-It indicates that **`delta_tas(0,:,:)`**, where by **`:`** we mean the entire range of the dimension, is the difference between **`tas(0,:,:)`** and **`climatological_tas(5,:,:)`**.
+It indicates that **`delta_tas(0,:,:)`**, where **`:`** means the entire range of the dimension, is the difference between **`tas(0,:,:)`** and **`climatological_tas(5,:,:)`**.
 
-If we chose instead to show the climatological time axis with only the three months needed in this example (June, July, and August), the following lines would replace the corresponding ones in the example above:
+If instead the climatological time axis is shown with only the three months needed in this example (June, July, and August), the following lines would replace the corresponding ones in the example above:
 
 ----
 dimensions:
@@ -1385,7 +1385,7 @@ The single dimension of the part node count variable must equal the total number
 For __polygon__ geometries with holes, the geometry container variable must have an **`interior_ring`** attribute that contains the name of a variable that indicates if the polygon parts are interior rings (i.e., holes) or not.
 This interior ring variable must contain the value 0 to indicate an exterior ring polygon and 1 to indicate an interior ring polygon.
 The single dimension of the interior ring variable must be the same dimension as that of the part node count variable.
-The geometry types included in this convention are listed in Table 7.1.
+The geometry types included in these conventions are listed in Table 7.1.
 
 [[table-geometry-types]]
 .Dimensionality, description, and additional required attributes for geometry_types.

@@ -7,7 +7,7 @@ Discrete sampling geometry datasets are characterized by a dimensionality that i
 === Features and feature types
 
 Each type of discrete sampling geometry (point, time series, profile or trajectory) is defined by the relationships among its spatiotemporal coordinates.
-We refer to the type of discrete sampling geometry as its **featureType**.
+The type of discrete sampling geometry is called its **featureType**.
 The term {ldquo} **feature** {rdquo} refers herein to a single instance of the **discrete sampling geometry** (such as a single time series).
 The representation of such features in a CF dataset was supported previous to the introduction of this chapter using a particular convention, which is still supported (that described by section 9.3.1).
 This chapter describes further conventions which offer advantages of efficiency and clarity for storing a collection of features in a single file.
@@ -72,7 +72,7 @@ Instance variables provide the metadata that differentiates individual features.
 The subscripts o and p distinguish the data elements that compose a single feature. 
 For example in a collection of **timeSeries** features, each time series instance, i, has data values at various times, o. 
 In a collection of **profile** features, the subscript, o, provides the index position along the vertical axis of each profile instance.
-We refer to data values in a feature as its **elements**, and to the dimensions of o and p as **element dimensions**.
+Data values in a feature are called **elements**, and the dimensions of o and p are called **element dimensions**.
 Each feature can have its own set of element subscripts o and p.
 For instance, in a collection of timeSeries features, each individual timeSeries can have its own set of times.
 The notation t(i,o) means there is a set of times with subscripts o for the elements of each feature i.  
@@ -96,7 +96,7 @@ Four types of representation are utilized in this chapter:
 * two **multidimensional array representations**, in which each feature instance is allocated the identical amount of storage space. 
 In these representations the instance dimension and the element dimension(s) are distinct CF coordinate axes (typical of coordinate axes discussed in chapter 4); and
 * two **ragged array representations**, in which each feature is provided with the minimum amount of space that it requires.
-In these representations the instances of the individual features are stacked sequentially along the same array dimension as the elements of the features; we refer to this combined dimension as the **sample dimension**.
+In these representations the instances of the individual features are stacked sequentially along the same array dimension as the elements of the features; this combined dimension is called the **sample dimension**.
 
 In the multidimensional array representations, data variables have both an instance dimension and an element dimension. 
 The dimensions may be given in any order. 

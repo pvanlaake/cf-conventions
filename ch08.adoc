@@ -4,13 +4,13 @@
 :figure: 0
 
 There are three methods for reducing dataset size: packing, lossless compression, and lossy compression.
-By packing we mean altering the data in a way that reduces its precision (but has no other effect on accuracy).
-By lossless compression we mean techniques that store the data more efficiently and result in no loss of precision or accuracy.
-By lossy compression we mean techniques that either store the data more efficiently and retain its precision but result in some loss in accuracy, or techniques that intentionally reduce data precision to improve the efficiency of subsequent lossless compression.
+Packing means altering the data in a way that reduces its precision (but has no other effect on accuracy).
+Lossless compression means techniques that store the data more efficiently and result in no loss of precision or accuracy.
+Lossy compression means techniques that either store the data more efficiently and retain its precision but result in some loss in accuracy, or techniques that intentionally reduce data precision to improve the efficiency of subsequent lossless compression.
 
 Lossless compression only works in certain circumstances, e.g., when a variable contains a significant amount of missing or repeated data values.
 In this case it is possible to make use of standard utilities, e.g., UNIX **`compress`** or GNU **`gzip`**, to compress the entire file after it has been written.
-In this section we offer an alternative compression method that is applied on a variable by variable basis.
+In this section an alternative compression method is presented that is applied on a variable by variable basis.
 This has the advantage that only one variable need be uncompressed at a given time.
 The disadvantage is that generic utilities that don't recognize the CF conventions will not be able to operate on compressed variables.
 
@@ -24,11 +24,11 @@ If both attributes are present, the data are scaled before the offset is added.
 When scaled data are written, the application should first subtract the offset and then divide by the scale factor.
 The units of a variable should be representative of the unpacked data.
 
-This standard is more restrictive than the <<NUG>> with respect to the use of the **`scale_factor`** and **`add_offset`** attributes; ambiguities and precision problems related to data type conversions are resolved by these restrictions.
+These conventions are more restrictive than the <<NUG>> with respect to the use of the **`scale_factor`** and **`add_offset`** attributes; ambiguities and precision problems related to data type conversions are resolved by these restrictions.
 
 When packed data is written, the **`scale_factor`** and **`add_offset`** attributes must be of the same type as the unpacked data, which must be either **`float`** or **`double`**. Data of type **`float`** must be packed into one of these types: **`byte`**, **`unsigned byte`**, **`short`**, **`unsigned short`**. Data of type **`double`** must be packed into one of these types: **`byte`**, **`unsigned byte`**, **`short`**, **`unsigned short`**, **`int`**, **`unsigned int`**.
 
-When packed data is read, it should be unpacked to the type of the **`scale_factor`** and **`add_offset`** attributes, which must have the same type if both are present. For guidance only, we suggest that packed data which does not conform to the rules of this section regarding the types of the data variable and attributes should be unpacked to **`double`** type, in order to minimise the risk of loss of precision.
+When packed data is read, it should be unpacked to the type of the **`scale_factor`** and **`add_offset`** attributes, which must have the same type if both are present. For guidance only, it is suggested that packed data which does not conform to the rules of this section regarding the types of the data variable and attributes should be unpacked to **`double`** type, in order to minimise the risk of loss of precision.
 
 When data to be packed contains missing values the attributes that indicate missing values (**`_FillValue`**, **`valid_min`**, **`valid_max`**, **`valid_range`**) must be of the same data type as the packed data.
 See <<missing-data>> for a discussion of how applications should treat variables that have attributes indicating both missing values and transformations defined by a scale and/or offset.
@@ -57,9 +57,9 @@ The list variable must not have an associated boundary variable.
 [caption="Example 8.1. "]
 .Horizontal compression of a three-dimensional array
 ====
-We eliminate sea points at all depths in a longitude-latitude-depth array of soil temperatures.
+In a longitude-latitude-depth array of soil temperatures all sea points at all depths can be eliminated.
 In this case, only the longitude and latitude axes would be affected by the compression.
-We construct a list `landpoint(landpoint)` containing the indices of land points. 
+A list `landpoint(landpoint)` is constructed containing the indices of land points. 
 
 ----
 dimensions:
@@ -79,7 +79,7 @@ variables:
 data:
   landpoint=363, 364, 365, ...;
 ----
-Since `landpoint(0)=363`, for instance, we know that `landsoilt(*,0)` maps on to point 363 of the original data with dimensions `(lat,lon)`.
+Since `landpoint(0)=363`, for instance, it can be inferred that `landsoilt(*,0)` maps on to point 363 of the original data with dimensions `(lat,lon)`.
 This corresponds to indices `(3,75)`, i.e., `363 = 3*96 + 75`.
 ====
 
@@ -87,7 +87,7 @@ This corresponds to indices `(3,75)`, i.e., `363 = 3*96 + 75`.
 [caption="Example 8.2. "]
 .Compression of a three-dimensional field
 ====
-We compress a longitude-latitude-depth field of ocean salinity by eliminating points below the sea-floor.
+Points below the sea floor can be eliminated to compress a longitude-latitude-depth field of ocean salinity.
 In this case, all three dimensions are affected by the compression, since there are successively fewer active ocean points at increasing depths. 
 
 ----
@@ -682,7 +682,7 @@ For instance, a **`computational_precision**` value of **`"64"**` would specify 
 Geoscientific models and measurements generate false floating-point precision (scientifically meaningless data bits) that wastes storage space.
 False precision can mislead (by implying noise is signal) and is scientifically pointless.
 Quantization algorithms can eliminate false precision, usually by rounding the least significant bits of <<IEEE_754>> floating-point mantissas to zeros.
-(Quantization of integer types, although theoretically allowed, is not covered by this convention.)
+(Quantization of integer types, although theoretically allowed, is not covered by these conventions.)
 The quantized results are valid <<IEEE_754>> values---no special software or decoder is necessary to read them.
 Importantly, the quantized bits compress more efficiently than random bits.
 Thus quantization is sometimes referred to as a form of lossy compression although, strictly speaking, quantization only pre-conditions data for more efficient compression by a subsequent compressor.

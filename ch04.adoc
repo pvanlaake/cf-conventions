@@ -6,18 +6,18 @@
 The commonest use of coordinate variables is to locate the data in space and time, but coordinates may be provided for any other continuous geophysical quantity (e.g. density, temperature, radiation wavelength, zenith angle of radiance, sea surface wave frequency) or discrete category (see <<discrete-axis>>, e.g. area type, model level number, ensemble member number) on which the data variable depends.
 
 Four types of coordinates receive special treatment by these conventions: latitude, longitude, vertical, and time.
-We continue to support the special role that the **`units`** and **`positive`** attributes play in the COARDS convention to identify coordinate type.
-As an extension to COARDS, we strongly recommend that a parametric (usually dimensionless) vertical coordinate variable should be associated, via **`standard_name`** and **`formula_terms`** attributes, with its explicit definition, which provides a mapping between its values and dimensional vertical coordinate values that can be uniquely located with respect to a point on the earth's surface.
+The special role that the **`units`** and **`positive`** attributes play in the COARDS conventions to identify coordinate type continues to be supported.
+As an extension to COARDS, it is strongly recommended that a parametric (usually dimensionless) vertical coordinate variable should be associated, via **`standard_name`** and **`formula_terms`** attributes, with its explicit definition, which provides a mapping between its values and dimensional vertical coordinate values that can be uniquely located with respect to a point on the earth's surface.
 
-Because identification of a coordinate type by its units is complicated by requiring the use of an external package <<UDUNITS>>, we provide two optional methods that yield a direct identification.
+Because identification of a coordinate type by its units is complicated by requiring the use of an external package <<UDUNITS>>, two optional methods are provided that yield a direct identification.
 The attribute **`axis`** may be attached to a coordinate variable and given one of the values **`X`**, **`Y`**, **`Z`** or **`T`** which stand for a longitude, latitude, vertical, or time axis respectively.
 Alternatively the **`standard_name`** attribute may be used for direct identification.
 But note that these optional attributes are in addition to the required COARDS metadata.
 
-To identify generic spatial coordinates we recommend that the **`axis`** attribute be attached to these coordinates and given one of the values **`X`**, **`Y`** or **`Z`**.
+To identify generic spatial coordinates, it is recommended that the **`axis`** attribute be attached to these coordinates and given one of the values **`X`**, **`Y`** or **`Z`**.
 The values **`X`** and **`Y`** for the axis attribute should be used to identify horizontal coordinate variables.
 If both X- and Y-axis are identified, **`X-Y-up`** should define a right-handed coordinate system, i.e. rotation from the positive X direction to the positive Y direction is anticlockwise if viewed from above.
-We strongly recommend that coordinate variables be used for all coordinate types whenever they are applicable.
+It is strongly recommended that coordinate variables be used for all coordinate types whenever they are applicable.
 
 The methods of identifying coordinate types described in this section apply both to coordinate variables and to auxiliary coordinate variables named by the **`coordinates`** attribute (see <<coordinate-system>>).
 
@@ -81,7 +81,7 @@ float lon(lon) ;
 
 Application writers should note that the UDUNITS package has limited recognition of the directionality implied by the "east" part of the unit specification.
 It defines **`degrees_east`** to be pi/180 radians, and hence equivalent to **`degrees_north`**.
-We recommend the determination that a coordinate is a longitude type should be done via a string match between the given unit and one of the acceptable forms of **`degrees_east`**.
+Hence, determination that a coordinate is a longitude type should be done via a string match between the given unit and one of the acceptable forms of **`degrees_east`**.
 
 Optionally, the longitude type may be indicated additionally by providing the **`standard_name`** attribute with the value **`longitude`**, and/or the **`axis`** attribute with the value **`X`**.
 
@@ -94,7 +94,7 @@ Variables representing dimensional height or depth axes must always explicitly i
 
 The direction of positive (i.e., the direction in which the coordinate values are increasing), whether up or down, cannot in all cases be inferred from the units.
 The direction of positive is useful for applications displaying the data.
-For this reason the attribute **`positive`** as defined in the COARDS standard is required if the vertical axis units are not a valid unit of pressure (as determined by the UDUNITS package <<UDUNITS>>) -- otherwise its inclusion is optional.
+For this reason the attribute **`positive`** as defined in the COARDS conventions is required if the vertical axis units are not a valid unit of pressure (as determined by the UDUNITS package <<UDUNITS>>) -- otherwise its inclusion is optional.
 The **`positive`** attribute may have the value **`up`** or **`down`** (case insensitive).
 This attribute may be applied to either coordinate variables or auxiliary coordinate variables that contain vertical coordinate data.
 
@@ -136,8 +136,8 @@ Plural forms are also acceptable.
 ==== Dimensionless Vertical Coordinate
 
 The **`units`** attribute is not required for dimensionless coordinates.
-For backwards compatibility with COARDS we continue to allow the **`units`** attribute to take one of the values: **`level`**, **`layer`**, or **`sigma_level`**.
-These values are not recognized by the UDUNITS package, and are considered a deprecated feature in the CF standard.
+For backwards compatibility with COARDS the **`units`** attribute may take one of the values: **`level`**, **`layer`**, or **`sigma_level`**.
+These values are not recognized by the UDUNITS package, and are considered a deprecated feature in the CF conventions.
 
 [[parametric-vertical-coordinate, Section 4.3.3, "Parametric Vertical Coordinate"]]
 ==== Parametric Vertical Coordinate
@@ -146,7 +146,7 @@ In some cases dimensional vertical coordinates are a function of horizontal loca
 The `standard_name` of the parametric (usually dimensionless) vertical coordinate variable can be used to find the definition of the associated computed (always dimensional) vertical coordinate in <<parametric-v-coord>>.
 The definition provides a mapping between the parametric vertical coordinate values and computed values that can positively and uniquely indicate the location of the data.
 The `formula_terms` attribute can be used to associate terms in the definitions with variables in a netCDF file, and the `computed_standard_name` attribute can be used to supply the `standard_name` of the computed vertical coordinate values computed according to the definition.
-To maintain backwards compatibility with COARDS the use of these attributes is not required, but is strongly recommended.
+To maintain backwards compatibility with the COARDS conventions the use of these attributes is not required, but is strongly recommended.
 Some of the definitions may be supplemented with information stored in the `grid_mapping` variable about the datum used as a vertical reference (e.g. geoid, other geopotential datum or reference ellipsoid; see <<grid-mappings-and-projections>> and <<appendix-grid-mappings>>).
 
 [[atm-sigma-coord-ex]]
@@ -233,7 +233,7 @@ It must comprise a unit of measure that is physically equivalent (see <<units>>)
 The time coordinate exactly equals the length of the time interval from the instant identified by the reference datetime to the instant identified by the time coordinate, in all cases except when leap seconds occur between the two instants in the **`standard`** calendar.
 (See <<appendix-leap-seconds>> for details.)
 
-The CF standard follows UDUNITS (<<units>>) in the definition of the acceptable units of measure for time.
+The CF conventions follow UDUNITS (<<units>>) in the definition of the acceptable units of measure for time.
 The most commonly used of these units (and their symbols) are **`day`** (**`d`**), **`hour`** (**`h`**), **`minute`** (**`min`**) and **`second`** (**`s`**).
 Plural forms are also acceptable.
 In CF, following UDUNITS, any unit may optionally have one of the decimal prefixes for multiples and submultiples (<<table-supported-units, Table 3.1>>) e.g. **`millisecond`** or **`ms`**.
@@ -241,12 +241,12 @@ CF recommends __not__ to use these prefixes with any unit of time other than **`
 
 UDUNITS defines a **`year`** to be exactly 365.242198781 days (the interval between 2 successive passages of the sun through vernal equinox).
 __It is not a calendar year.__ UDUNITS defines a **`month`** to be exactly **`year/12`**, which is __not a calendar month__.
-We recommend that **`year`** and **`month`** should not be used, because of the potential for mistakes and confusion.
+It is recommended that **`year`** and **`month`** should not be used, because of the potential for mistakes and confusion.
 
 UDUNITS defines a **`minute`** as 60 **`seconds`**, an **`hour`** as 3600 **`seconds`** and a **`day`** as 86400 **`seconds`**, consistent with the <<SI>> definitions of these non-SI units.
 These are fixed units of measure.
 When a leap second is inserted into UTC, the minute, hour and day affected differ by one second from their usual durations according to clock time, but the units of **`minute`**, **`hour`** and **`day`** do not.
-To avoid mistakes and confusion, we therefore recommend that these units should not be used in the **`utc`** calendar (<<calendar>>).
+To avoid mistakes and confusion, it is therefore recommended that these units should not be used in the **`utc`** calendar (<<calendar>>).
 
 UDUNITS permits a number of alternatives to the word **`since`** in the units of time coordinates.
 All the alternatives have exactly the same meaning in UDUNITS.
@@ -263,8 +263,8 @@ Its format is __y__-__m__-__d__ [__H__:__M__:__S__[ __T__]], where [...] indicat
 __T__ is __not__ a time zone name or acronym; it is an interval of time.
 
 The default for time zone offset __T__ is zero, which may also be explicitly indicated in any of the numeric formats for __T__ defined below, or by the letter **`Z`**, sometimes referred to as "Zulu Time".
-We suggest that a zero offset be stated explicitly to avoid confusion in situations where omitting it might be misunderstood as indicating local time.
-We recommend that a non-zero time zone offset should __not__ be specified __in any situation__, because it is easy to make mistakes about the sign of the offset and allowance for daylight-saving/summer time.
+It is suggested that a zero offset be stated explicitly to avoid confusion in situations where omitting it might be misunderstood as indicating local time.
+It is recommended that a non-zero time zone offset should __not__ be specified __in any situation__, because it is easy to make mistakes about the sign of the offset and allowance for daylight-saving/summer time.
 A non-zero offset is __not allowed__ in the **`utc`** and **`tai`** calendars (see <<calendar>>).
 
 In a time zone with zero offset, time (approximately) equals mean solar time for 0 **`degrees_east`** of longitude.
@@ -352,7 +352,7 @@ Leap seconds are ignored by most software, including UDUNITS.
 * Use the **`standard`** calendar for observational data in other cases.
 
 * Use the **`proleptic_gregorian`** calendar for model-generated data.
-(In principle a model could be programmed to include leap seconds, but we assume that this is not the case.)
+(In principle a model could be programmed to include leap seconds, but it is assumed that this is not the case.)
 
 <<appendix-leap-seconds>> compares these calendars' treatment of leap seconds and explains the above recommendations.
 Leap seconds do not need to be considered in the **`360_day`**, **`365_day`** and **`366_day`** calendars.

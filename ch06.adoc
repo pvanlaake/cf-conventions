@@ -21,7 +21,7 @@ This is a convenience feature.
 ==== Geographic Regions
 
 When data is representative of geographic regions which can be identified by names but which have complex boundaries that cannot practically be specified using longitude and latitude boundary coordinates, a labeled axis should be used to identify the regions.
-We recommend that the names be chosen from the list of link:$$https://cfconventions.org/Data/cf-standard-names/docs/standardized-region-names.html$$[standardized region names] whenever possible.
+WIt is recommended that the names be chosen from the list of link:$$https://cfconventions.org/Data/cf-standard-names/docs/standardized-region-names.html$$[standardized region names] whenever possible.
 To indicate that the label values are standardized the variable that contains the labels must be given the **`standard_name`** attribute with the value `region`.
 
 [[northward-heat-transport-in-atlantic-ocean-ex]]
@@ -29,7 +29,7 @@ To indicate that the label values are standardized the variable that contains th
 .Northward heat transport in Atlantic Ocean
 ====
 
-Suppose we have data representing northward heat transport across a set of zonal slices in the Atlantic Ocean.
+Suppose one has data representing northward heat transport across a set of zonal slices in the Atlantic Ocean.
 Note that the standard names to describe this quantity do not include location information.
 That is provided by the latitude coordinate and the labeled axis:
 

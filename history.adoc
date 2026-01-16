@@ -7,6 +7,8 @@
 
 === Version 1.14-draft
 
+* {issues}623[Issue #623]: Consistently refer to "CF conventions" and use of impersonal from.
+
 === Version 1.13 (17 December 2025)
 
 * {issues}582[Issue #582]: Conventions for anomaly data
@@ -21,7 +23,7 @@
 
 === Version 1.12 (04 December 2024)
 
-* {issues}513[Issue #513]: Include DOI and License information in the conventions document 
+* {issues}513[Issue #513]: Include DOI and License information in the conventions document
 * {issues}499[Issue #499]: Formatting of local links in text
 * {issues}566[Issue #566]: Fix invalid CRS WKT attribute in example 5.12.
 * {issues}527[Issue #527]: Clarify the conventions for boundary variables, especially for auxiliary coordinate variables of more than one dimension, state that there is no default for boundaries, add more information about bounds in section 1.
@@ -47,7 +49,7 @@
 * {issues}458[Issue #458]: Clarify the use of compressed dimensions in related variables
 * {issues}486[Issue #486]: Fix PDF formatting problems and invalid references
 * {issues}490[Issue #490]: Simple correction to Example 6.1.2
-* {issues}457[Issue #457]: Creation date of the draft Conventions document 
+* {issues}457[Issue #457]: Creation date of the draft Conventions document
 * {issues}445[Issue #445]: Updates concerning the Polar Stereographic Grid Mapping
 * {issues}468[Issue #468]: Update section 2.3 to clarify recommended character set
 * {issues}147[Issue #147]: Clarify the use of compressed dimensions in related variables
@@ -74,7 +76,7 @@
 * {pull-requests}408[Pull request #408]: Deleted a sentence on "rotated Mercator" under `Oblique Mercator` grid mapping in Appendix F
 * {issues}265[Issue #265]: Clarification of the requirements on bounds variable attributes
 * {issues}260[Issue #260]: Clarify use of dimensionless units
-* {issues}410[Issue #410]: Delete "on a spherical Earth" from the definition of the `latitude_longitude` grid mapping in Appendix F 
+* {issues}410[Issue #410]: Delete "on a spherical Earth" from the definition of the `latitude_longitude` grid mapping in Appendix F
 * {issues}153[Issue #153]: Reference UGRID conventions in CF
 
 === Version 1.10 (31 August 2022)

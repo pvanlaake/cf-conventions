@@ -17,7 +17,7 @@ These are:
 - `semi_major_axis`
 - `semi_minor_axis`
 
-In general we have used the FGDC "Content Standard for Digital Geospatial Metadata" <<FGDC>> as a guide in choosing the values for **`grid_mapping_name`** and the attribute names for the parameters describing map projections.
+In general, the FGDC "Content Standard for Digital Geospatial Metadata" <<FGDC>> is used as a guide in choosing the values for **`grid_mapping_name`** and the attribute names for the parameters describing map projections.
 
 === Albers Equal Area
 
@@ -84,7 +84,7 @@ This model is independent of the physical scan principles of any observing instr
 The model consists conceptually of a set of two rotating circles with a colocated centre, whose axes of rotation are perpendicular to each other.
 The axis of the outer circle is stationary, while the axis of the inner circle moves about the stationary axis.
 This means that a given viewing angle described using this model is the result of matrix multiplications, which is not commutative, so that order of operations is essential in achieving accurate results.
-The two axes are conventionally called the sweep-angle and fixed-angle axes; we adhere to this terminology, although some find these terms confusing, for the sake of interoperability with existing implementations.
+The two axes are conventionally called the sweep-angle and fixed-angle axes; this terminology is used here, although some find these terms confusing, for the sake of interoperability with existing implementations.
 
 +
 The algorithm for computing the mapping may be found at link:$$https://www.cgms-info.org/documents/pdf_cgms_03.pdf$$[https://www.cgms-info.org/documents/pdf_cgms_03.pdf].

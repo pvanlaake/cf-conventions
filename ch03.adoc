@@ -1,19 +1,19 @@
 ==  Description of the Data
 
 The attributes described in this section are used to provide a description of the content and the units of measurement for each variable.
-We continue to support the use of the **`units`** and **`long_name`** attributes as defined in COARDS.
-We extend COARDS by adding the optional **`standard_name`** attribute which is used to provide unique identifiers for variables.
+The use of the **`units`** and **`long_name`** attributes as defined in the COARDS conventions is maintained in these conventions.
+The COARDS conventions are extended by adding the optional **`standard_name`** attribute which is used to provide unique identifiers for variables.
 This is important for data exchange since one cannot necessarily identify a particular variable based on the name assigned to it by the institution that provided the data.
 
 The **`standard_name`** attribute can be used to identify variables that contain coordinate data.
-But since it is an optional attribute, applications that implement these standards must continue to be able to identify coordinate types based on the COARDS conventions.
+But since it is an optional attribute, applications that implement these conventions must continue to be able to identify coordinate types based on the COARDS conventions.
 
 [[units, Section 3.1, "Units"]]
 === Units
 
 The **`units`** attribute is required for all variables that represent dimensional quantities (except for boundary variables defined in <<cell-boundaries>> and climatology boundary variables defined in <<climatological-statistics>>).
 The **`units`** attribute is permitted but not required for dimensionless quantities (see <<dimensionless-units>>).
-If multiplication by a dimensionless constant and addition of a dimensionless constant are the only operations required for the value of a dimensional quantity expressed in one unit to be converted to the value expressed in another unit, we describe the two units as __physically equivalent__.
+If multiplication by a dimensionless constant and addition of a dimensionless constant are the only operations required for the value of a dimensional quantity expressed in one unit to be converted to the value expressed in another unit, the two units are considered __physically equivalent__.
 
 The value of the **`units`** attribute is a string that can be recognized by the UDUNITS package <<UDUNITS>>, with the exceptions that are given in <<dimensionless-units>> and <<units-multiples>>.
 Note that case is significant in the **`units`** strings.
@@ -22,7 +22,7 @@ CF does not assume or require that the UDUNITS software will be used for **`unit
 In most **`units`** conversions, the sole operation on the data is multiplication by a scale factor.
 Special treatment is required in converting the **`units`** of variables that involve temperature (<<temperature-units>>) and the **`units`** of time coordinate variables (<<time-coordinate>>).
 
-The COARDS convention prohibits the unit `degrees` altogether, but this unit is not forbidden by the CF convention because it may in fact be appropriate for a variable containing, say, solar zenith angle.
+The COARDS conventions prohibit the unit `degrees` altogether, but this unit is not forbidden by the CF conventions because it may in fact be appropriate for a variable containing, say, solar zenith angle.
 The unit `degrees` is also allowed on coordinate variables such as the latitude and longitude coordinates of a transformed grid.
 In this case the coordinate values are not true latitudes and longitudes, which must always be identified using the more specific forms of `degrees` as described in <<latitude-coordinate>> and <<longitude-coordinate>>.
 
@@ -36,16 +36,16 @@ The canonical unit (see also <<standard-name>>) for dimensionless quantities tha
 The UDUNITS package defines a few dimensionless units, such as `percent`, `ppm` (parts per million, 1e-6), and `ppb` (parts per billion, 1e-9).
 As an alternative to the canonical **`units`** of `1` or some other unitless number, the **`units`** for a dimensionless quantity may be given as a ratio of dimensional units, for instance `mg kg-1` for a mass ratio of 1e-6, or `microlitre litre-1` for a volume ratio of 1e-6. Data-producers are invited to consider whether this alternative would be more helpful to the users of their data.
 
-The CF convention supports dimensionless units that are UDUNITS compatible, with one exception, concerning the dimensionless units defined by UDUNITS for volume ratios, such as `ppmv` and `ppbv`.
+The CF conventions support dimensionless units that are UDUNITS compatible, with one exception, concerning the dimensionless units defined by UDUNITS for volume ratios, such as `ppmv` and `ppbv`.
 These units are allowed in the **`units`** attribute by CF only if the data variable has no **`standard_name`**.
 These units are prohibited by CF if there is a **`standard_name`**, because the **`standard_name`** defines whether the quantity is a volume ratio, so the **`units`** are needed only to indicate a dimensionless number.
  
 Information describing a dimensionless physical quantity itself (e.g.
 "area fraction" or "probability") does not belong in the **`units`** attribute, but should be given in the **`long_name`** or **`standard_name`** attributes (see <<long-name>> and <<standard-name>>), in the same way as for physical quantities with dimensional units.
 As an exception, to maintain backwards compatibility with COARDS, the text strings `level`, `layer`, and `sigma_level` are allowed in the **`units`** attribute, in order to indicate dimensionless vertical coordinates.
-This use of **`units`** is not compatible with UDUNITS, and is deprecated by this standard because conventions for more precisely identifying dimensionless vertical coordinates are available (see <<dimensionless-vertical-coordinate>>).
+This use of **`units`** is not compatible with UDUNITS, and is deprecated by these conventions because conventions for more precisely identifying dimensionless vertical coordinates are available (see <<dimensionless-vertical-coordinate>>).
 
-The UDUNITS syntax that allows scale factors and offsets to be applied to a unit is not supported by this standard, except for case of specifying reference time, see section <<time-coordinate>>.
+The UDUNITS syntax that allows scale factors and offsets to be applied to a unit is not supported by these conventions, except for case of specifying reference time, see section <<time-coordinate>>.
 The application of any scale factors or offsets to data should be indicated by the **`scale_factor`** and **`add_offset`** attributes.
 Use of these attributes for data packing, which is their most important application, is discussed in detail in <<packed-data>>.
 
@@ -54,7 +54,7 @@ Use of these attributes for data packing, which is their most important applicat
 ==== Temperature units
 
 The **`units`** of temperature imply an origin (i.e. zero point) for the associated measurement scale.
-When the temperature value is the degree of warmth with respect to the origin of the measurement scale, we call it an _on-scale temperature_.
+When the temperature value is the degree of warmth with respect to the origin of the measurement scale, it is called an _on-scale temperature_.
 When **`units`** of on-scale temperature are converted, the data may require the addition of an offset as well as multiplication by a scale factor, because the physical meaning of a numerical value of zero for an on-scale temperature depends on the unit of measurement.
 On-scale temperature is _unique_ among quantities in the respect that the origin and the unit of measurement are both defined by the **`units`** and therefore cannot be chosen independently.
 For all other quantities, the origin and the unit of measurement are independent.
@@ -70,7 +70,7 @@ A **`standard_name`** (<<standard-name>>) or **`standard_name`** modifier (<<sta
 Some statistical operations described by the **`cell_methods`** attribute (<<cell-methods>>; <<appendix-cell-methods>>) imply that temperature must be interpreted as temperature difference, but this attribute is optional too.
 
 In order to convert the **`units`** correctly, it is essential to know whether a temperature is on-scale or a difference.
-Therefore this standard strongly recommends that any variable whose **`units`** involve a temperature unit should also have a **`units_metadata`** attribute to make the distinction.
+Therefore these conventions strongly recommend that any variable whose **`units`** involve a temperature unit should also have a **`units_metadata`** attribute to make the distinction.
 This attribute must have one of the following three values: `temperature: on_scale`, `temperature: difference`, `temperature: unknown`.
 The **`units_metadata`** attribute, **`standard_name`** modifier (<<standard-name-modifiers>>) and **`cell_methods`** attribute (<<appendix-cell-methods>>) must be consistent if present.
 A variable must not have a **`units_metadata`** attribute if it has no **`units`** attribute or if its **`units`** do not involve a temperature unit.
@@ -102,11 +102,11 @@ This value of **`units_metadata`** indicates that the data-writer does not know 
 If the **`units_metadata`** attribute is not present, the data-reader should assume `temperature: unknown`.
 The **`units_metadata`** attribute was introduced in CF 1.11.
 In data written according to versions before 1.11, `temperature: unknown` should be assumed for all **`units`** involving temperature, if it cannot be deduced from other metadata.
-We note (for guidance _only_ regarding `temperature: unknown`, _not_ as a CF convention) that the UDUNITS software assumes `temperature: on_scale` for **`units`** strings containing only a unit of temperature, and `temperature: difference` for **`units`** strings in which a unit of temperature is raised to any power other than unity, or multiplied or divided by any other unit.
+It is noted (for guidance _only_ regarding `temperature: unknown`, _not_ as a CF convention) that the UDUNITS software assumes `temperature: on_scale` for **`units`** strings containing only a unit of temperature, and `temperature: difference` for **`units`** strings in which a unit of temperature is raised to any power other than unity, or multiplied or divided by any other unit.
 
 With `temperature: on_scale`, correct conversion can be guaranteed only for pure temperature **`units`**.
 If the quantity is an on-scale temperature multiplied by some other quantity, it is not possible to convert the data from the **`units`** given to any other **`units`** that involve a temperature with a different origin, given only the **`units`**.
-For instance, when temperature is on-scale, a value in `kg degree_C m-2` can be converted to a value in `kg K m-2` only if we know separately the values in `degree_C` and `kg m-2` of which it is the product.
+For instance, when temperature is on-scale, a value in `kg degree_C m-2` can be converted to a value in `kg K m-2` only if the values in `degree_C` and `kg m-2` of which it is the product are separately known.
 
 
 [[units-multiples, Section 3.1.3, "Scale factors and offsets"]]
@@ -115,7 +115,7 @@ For instance, when temperature is on-scale, a value in `kg degree_C m-2` can be 
 UDUNITS recognises the <<SI>> prefixes shown in <<table-supported-units, Table 3.1>> for decimal multiples and submultiples of units, and allows them to be applied to non-SI units as well.
 UDUNITS offers a syntax for indicating arbitrary scale factors and offsets to be applied to a unit.
 (Note that this is different from the scale factors and offsets used for converting between **`units`**, as discussed for temperature in <<temperature-units>>.)
-This UDUNITS syntax for arbitrary transformation of **`units`** is not supported by the CF standard, except for the case of specifying reference time (<<time-coordinate>>).
+This UDUNITS syntax for arbitrary transformation of **`units`** is not supported by the CF conventions, except for the case of specifying reference time (<<time-coordinate>>).
 The application of any scale factors or offsets to data should be indicated by the **`scale_factor`** and **`add_offset`** attributes.
 Use of these attributes for data packing, which is their most important application, is discussed in detail in <<packed-data>>.
 
@@ -152,7 +152,7 @@ A fundamental requirement for exchange of scientific data is the ability to desc
 To some extent this is the role of the **`long_name`** attribute as defined in the <<NUG>>.
 However, usage of **`long_name`** is completely ad-hoc.
 For many applications it is desirable to have a more definitive description of the quantity, which allows users of data from different sources (some of which might be models and others observational) to determine whether quantities are in fact comparable.
-For this reason each variable may optionally be given a "standard name", whose meaning is defined by this convention.
+For this reason each variable may optionally be given a "standard name", whose meaning is defined by these conventions.
 There may be several variables in a dataset with any given standard name, and these may be distinguished by other metadata, such as coordinates (<<coordinate-types>>) and **`cell_methods`** (<<cell-methods>>).
 
 A standard name is associated with a variable via the attribute **`standard_name`** which takes a string value comprised of a standard name optionally followed by one or more blanks and a standard name modifier (a string value from <<standard-name-modifiers>>).
@@ -170,11 +170,11 @@ Unless it is dimensionless, a variable with a **`standard_name`** attribute must
 Units of time coordinates (<<time-coordinate>>), whose **`units`** attribute includes the word **`since`**, are _not_ physically equivalent to time units that do not include **`since`** in the **`units`**.
 To mark this distinction, the canonical unit given for quantities used for time coordinates is **`s since 1972-01-01`**.
 The reference datetime in the canonical unit (the beginning of the day i.e. midnight on 1st January 1972 at 0 `degrees_east`) is not restrictive; the time coordinate variable's own **`units`** may contain any reference datetime (after **`since`**) that is valid in its calendar.
-(We use `1972-01-01` because it is when the current definition of UTC came into force, and a valid datetime in all CF calendars; see also <<calendar>>.)
+(`1972-01-01` is used because that is when the current definition of UTC came into force, and a valid datetime in all CF calendars; see also <<calendar>>.)
 In both kinds of time **`units`** attribute (with or without **`since`**), any unit for measuring time can be used i.e. any unit which is physically equivalent to the SI base unit of time, namely the second.
 
 description:: The description is meant to clarify the qualifiers of the fundamental quantities such as which surface a quantity is defined on or what the flux sign conventions are.
-We don't attempt to provide precise definitions of fundumental physical quantities (e.g., temperature) which may be found in the literature.
+No attempt is made to provide precise definitions of fundumental physical quantities (e.g., temperature) which may be found in the literature.
 The description may define rules on the variable type, attributes and coordinates which must be complied with by any variable carrying that standard name (such as in Example 3.5).
 
 The standard name table is located at

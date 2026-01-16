@@ -233,7 +233,7 @@ When the intention of a data variable is to contain only a single time series, t
 ====
 
 While an idealized time series is defined at a single, stable point location, there are examples of time series, such as cabled ocean surface mooring measurements, in which the precise position of the observations varies slightly from a nominal fixed point. It is quite common that the deployment position of a station changes after maintenance or repositioning after it drifts. 
-In the following example we show how the spatial positions of such a time series should be encoded in CF. In addition, this example shows how lossless compression by gathering <<compression-by-gathering>> has been applied to the deployment coordinate variables, which otherwise would contain a lot of missing or repetitive data.
+In the following example it is shown how the spatial positions of such a time series should be encoded in CF. In addition, this example shows how lossless compression by gathering <<compression-by-gathering>> has been applied to the deployment coordinate variables, which otherwise would contain a lot of missing or repetitive data.
 Note that although this example shows only a single time series, the technique is applicable to all of the representations.
 
 [[example-h.5]]
@@ -1203,7 +1203,7 @@ In the latter case, listing the vertical coordinate variable in the coordinates 
 ==== Ragged array representation of time series profiles
 
 When the number of profiles and levels for each station varies, one can use a ragged array representation.
-Each of the two element dimensions (time and vertical) could in principle be stored either contiguous or indexed, but this convention supports only one of the four possible choices.
+Each of the two element dimensions (time and vertical) could in principle be stored either contiguous or indexed, but these conventions support only one of the four possible choices.
 This uses the contiguous ragged array representation for each profile (9.5.43.3), and the indexed ragged array representation to organise the profiles into time series (9.3.54).
 The canonical use case is when writing real-time data streams that contain profiles from many stations, arriving randomly, with the data for each entire profile written all at once.
 
@@ -1443,7 +1443,7 @@ In the latter case, listing the vertical coordinate variable in the coordinates 
 ==== Ragged array representation of trajectory profiles
 
 When the number of profiles and levels for each trajectory varies, one can use a ragged array representation.
-Each of the two element dimensions (along a trajectory, within a profile) could in principle be stored either contiguous or indexed, but this convention supports only one of the four possible choices.
+Each of the two element dimensions (along a trajectory, within a profile) could in principle be stored either contiguous or indexed, but these conventions support only one of the four possible choices.
 This uses the contiguous ragged array representation for each profile (9.3.3), and the indexed ragged array representation to organise the profiles into time series (9.3.4).
 The canonical use case is when writing real-time data streams that contain profiles from many trajectories, arriving randomly, with the data for each entire profile written all at once.
 

@@ -5,7 +5,7 @@
 == Leap Seconds
 
 This appendix describes the treatment of leap seconds in CF in more detail than <<calendar>>, and provides guidance for writers of datasets about the choice of a suitable CF calendar.
-Because precision to the second has rarely been needed in the climate and forecast community, leap seconds have typically been ignored, including in many datasets and versions of the CF standard before 1.12.
+Because precision to the second has rarely been needed in the climate and forecast community, leap seconds have typically been ignored, including in many datasets and versions of the CF conventions before 1.12.
 
 In CF 1.13 and later, __in all calendars except the **`utc`** calendar__,
 
@@ -13,7 +13,7 @@ In CF 1.13 and later, __in all calendars except the **`utc`** calendar__,
 
 * the difference is always 60 seconds between the time coordinates for the start of consecutive minutes.
 
-If you are producing model-generated datasets with datetimes that follow the Gregorian calendar, the **`proleptic_gregorian`** calendar is recommended, because it unequivocally indicates to the user of the dataset that leap seconds are not included in the timeline (we assume this is true for model data).
+If you are producing model-generated datasets with datetimes that follow the Gregorian calendar, the **`proleptic_gregorian`** calendar is recommended, because it unequivocally indicates to the user of the dataset that leap seconds are not included in the timeline (it is assumed that this is true for model data).
 On these grounds, it is preferable to the **`standard`** calendar, which is ambiguous in CF versions before 1.13 about the inclusion of leap seconds (see below).
 
 If you are producing real-world datasets with datetimes in UTC, and if it's important for the datetimes and time intervals to be accurate to the second, the **`utc`** calendar is recommended.
@@ -34,7 +34,7 @@ It has the following consequences:
 
 * The difference between two time coordinates will differ from the duration of the time interval between the two instants by the net number of leap seconds that occurred between them.
 
-We illustrate the differences between the **`utc`** and **`standard`** calendars with examples related to the leap second that was added to UTC at the end of 2016.
+The differences between the **`utc`** and **`standard`** calendars are illustrated with examples related to the leap second that was added to UTC at the end of 2016.
  If **`calendar="utc"`** and **`units="seconds since 2016-12-31 23:59:58"`**, a value of 4 for the time coordinate represents the datetime 2017-01-01 00:00:01, because four seconds had elapsed by that instant since 2016-12-31 23:59:58 (seconds ending at 2016-12-31 23:59:59, 2016-12-31 23:59:60, 2017-01-01 00:00:00, 2017-01-01 00:00:01).
 If **`calendar="standard"`**, with the same **`units="seconds since 2016-12-31 23:59:58"`**, the datetime 2017-01-01 00:00:01 is represented by a time coordinate of 3, because the UTC leap second (from 2016-12-31 23:59:60 to 2017-01-01 00:00:00) is ignored when calculating time coordinates in the **`standard`** calendar .
 
