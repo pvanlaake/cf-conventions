@@ -160,8 +160,9 @@
         "affiliation": "NCAS and STFC"
       },
       {
-        "name": "Cofi\u00f1o, Antonio",
-        "affiliation": "University of Cantabria"
+        "name": "Cofi\u00f1o, Antonio S.",
+        "affiliation": "Instituto de Fisica de Cantabria, CSIC-UC",
+        "orcid": "0000-0001-7719-979X"
       },
       {
         "name": "McGinnis, Seth",
@@ -209,13 +210,13 @@
   "files": [
     {
       "filename": "cf-conventions.pdf",
-      "size": 6978931
-      "checksum": "md5:191dd3a3b52c3cf1a168b968ed197c22"
+      "size": 6979310,
+      "checksum": "md5:faf62b78cae20007b6c85ac380028133"
     },
     {
       "filename": "conformance.pdf",
-      "size": 433779
-      "checksum": "md5:3dd55e78fbdbe668e8b1b2bafc562011"
+      "size": 433779,
+      "checksum": "md5:e452ea63e347b8fa0bf1c63a0c36e71c"
     }
   ]
 }
